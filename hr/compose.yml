@@ -1,0 +1,50 @@
+services:
+  web:
+    build: 
+        context: .
+        no_cache: true
+    networks: 
+        - db_nw
+        - public_nw
+    volumes: 
+        - ./upload:/media
+    ports:
+        - "127.0.0.1:8800:8800/udp"
+        - "127.0.0.1:8800:8800/tcp"
+    depends_on:
+        - db        
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8800/app/managers"]
+      interval: 60s
+      timeout: 60s
+      retries: 6
+      start_period: 120s
+      #start_interval: 5s      
+    #develop:
+    #    watch:
+    #        - path: .
+    #          action: rebuild
+  db:
+    image: postgis/postgis
+    networks: 
+        - db_nw
+    volumes: 
+        - ./data:/var/lib/postgresql/data
+    restart: always
+    environment:
+        POSTGRES_DB: my_db
+        POSTGRES_USER: my_user
+        POSTGRES_PASSWORD: my_db@123
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "my_db","-U","my_user"]
+      interval: 60s
+      timeout: 60s
+      retries: 5
+      start_period: 120s  
+networks:
+  db_nw:
+    driver: host
+  public_nw:
+    driver: host
+
