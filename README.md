@@ -1,5 +1,5 @@
 # Commands for management
-change directory to a directory with `compose.yaml` folder
+change directory to a directory with `compose.yaml` folder (ex: hr). 
 
 ## Stop running containers
 ```
