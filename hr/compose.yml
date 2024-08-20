@@ -47,6 +47,8 @@ services:
     networks: 
         - db_nw
         - public_nw
+    volumes: 
+        - ./metabase-data:/metabase-data
     ports:
       - 3000:3000
     environment:
