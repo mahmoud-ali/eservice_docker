@@ -65,7 +65,7 @@ services:
 
 networks:
   db_nw:
-    driver: host
+    # driver: host
   public_nw:
-    driver: host
+    # driver: host
 
