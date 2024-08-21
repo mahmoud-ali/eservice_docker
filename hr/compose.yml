@@ -65,7 +65,6 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
           memory: 2gb
 networks:
   db_nw:
