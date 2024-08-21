@@ -62,7 +62,11 @@ services:
     depends_on:
         - db        
     restart: always
-    mem_limit: 2gb
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2gb
 networks:
   db_nw:
     # driver: host
