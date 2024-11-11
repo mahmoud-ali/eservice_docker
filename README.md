@@ -11,7 +11,11 @@ docker compose up --build -d
 ```
 ## Backup hr data
 ```
-sudo tar czf /home/mahmoud/hr_backup_`date -I`.tar.gz data/ upload/
+cd /home/mahmoud/hr_compose
+
+rm /tmp/db.sql
+docker compose exec db pg_dump my_db -h localhost -U my_user > /tmp/db.sql
+/usr/bin/tar czf /home/mahmoud/sharefolder/backup_`date -I`.tar.gz /tmp/db.sql /home/mahmoud/hr_compose/upload/
 ```
 ## Encrypt and zip data
 ```
