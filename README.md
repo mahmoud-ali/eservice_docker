@@ -21,3 +21,7 @@ docker compose exec db pg_dump my_db -h localhost -U my_user > /tmp/db.sql
 ```
 sudo tar cf - data/ upload/|gpg -c > hr_backup_`date -I`.tar.gpg
 ```
+## Dump hr data
+```
+./manage.py dumpdata hr --natural-foreign --natural-primary --format yaml -o ./dump.yaml.gz
+```
